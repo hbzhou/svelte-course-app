@@ -10,7 +10,7 @@
 
 {#if !!course}
 	<div class=" border-solid border-2 border-blue-300 m-4">
-		<h1>{course.title}</h1>
+		<h1 class=" text-2xl text-center my-2">{course.title}</h1>
 		<div class="flex">
 			<div class=" w-1/2 m-4">{course.description}</div>
 			<div class="m-4">
