@@ -7,5 +7,3 @@
 	<Logo />
 	<Profile />
 </nav>
-
-<slot />

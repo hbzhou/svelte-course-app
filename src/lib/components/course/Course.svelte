@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
+
 	export let course: Course;
 	const { title, description, duration, authors, creationDate } = course;
 </script>
@@ -22,7 +25,12 @@
 			<span>{creationDate}</span>
 		</div>
 		<div class="m-2 text-center">
-			<button class="border border-solid w-36 p-1"> Show course </button>
+			<button
+				class="border border-solid w-36 p-1 bg-sky-500"
+				on:click={() => goto(`${$page.url.pathname}/${course.id}`)}
+			>
+				Show course
+			</button>
 		</div>
 	</div>
 </div>
