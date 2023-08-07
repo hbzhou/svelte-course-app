@@ -69,7 +69,4 @@
 			opacity: 1;
 		}
 	}
-	button {
-		display: inline-block;
-	}
 </style>
