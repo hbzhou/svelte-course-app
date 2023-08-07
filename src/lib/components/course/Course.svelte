@@ -26,7 +26,7 @@
 		</div>
 		<div class="m-2 text-center">
 			<button
-				class="border border-solid w-36 p-1 bg-sky-500 rounded-md"
+				class="border border-solid w-36 p-1 bg-sky-500 rounded-md h-10"
 				on:click={() => goto(`${$page.url.pathname}/${id}`)}
 			>
 				Show course
