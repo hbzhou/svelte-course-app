@@ -31,7 +31,7 @@
 			<button on:click={() => (showModal = false)}>x</button>
 		</div>
 		<div class="flex items-center my-8">
-			<div class="mx-2 font-bold">AuthorName:</div>
+			<div class="mx-2 font-bold">Name:</div>
 			<input type="text" name="name" class="border-2 border-solid w-72 h-8 rounded-md" />
 		</div>
 	</Modal>
