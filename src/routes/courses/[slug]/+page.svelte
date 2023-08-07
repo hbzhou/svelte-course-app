@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { mockedCoursesList, mockedAuthorsList } from '../../../constant';
 	import { page } from '$app/stores';
+	import { courses } from '../../../store/store';
 
 	const id = $page.params.slug;
-	const course = mockedCoursesList.find((item) => {
+	const course = $courses.find((item) => {
 		return item.id === id;
 	});
 </script>
@@ -29,8 +29,8 @@
 				<div class="flex">
 					<div class="font-bold mr-3">Authors:</div>
 					<div>
-						{#each course.authors as id (id)}
-							<div>{mockedAuthorsList.find((author) => author.id === id)?.name}</div>
+						{#each course.authors ?? [] as author (author)}
+							<div>{author}</div>
 						{/each}
 					</div>
 					<div />
