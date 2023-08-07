@@ -10,7 +10,7 @@
 	<div class="flex justify-between m-4">
 		<SearchBar />
 		<button
-			class="border border-solid w-48 p-1 bg-cyan-600"
+			class="border border-solid w-48 p-1 bg-cyan-600 rounded-md"
 			on:click={() => goto(`${$page.url.pathname}/edit`)}>Add new Course</button
 		>
 	</div>
