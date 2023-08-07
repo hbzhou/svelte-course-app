@@ -46,7 +46,7 @@
 		<div>Authors</div>
 		<select
 			name="authors"
-			class="border border-solid h-20 w-44 border-amber-300 rounded-md"
+			class="border border-solid h-24 w-48 border-amber-300 rounded-md"
 			multiple
 			bind:value={course.authors}
 		>

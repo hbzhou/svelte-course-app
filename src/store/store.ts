@@ -1,4 +1,4 @@
-import { derived, writable } from "svelte/store";
+import { derived, readable, writable } from "svelte/store";
 import { mockedAuthorsList, mockedCoursesList } from "../constant";
 
 
@@ -14,3 +14,5 @@ export const courses = derived(courseList, ($courseList) => $courseList.map((cou
         authors: authorNames
     }
 }))
+
+export const authors = readable(mockedAuthorsList)
