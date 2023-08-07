@@ -7,7 +7,7 @@
 	];
 </script>
 
-<div class=" flex items-center justify-between">
+<div class=" flex items-center justify-between p-2">
 	<Logo />
 	{#each menus as menu (menu.path)}
 		<Menu {menu} />
