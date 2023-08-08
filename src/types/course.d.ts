@@ -4,5 +4,5 @@ declare type Course = {
     description?: string;
     creationDate?: string;
     duration?: number;
-    authors?: string[] = [];
+    authors: string[] = [];
 };

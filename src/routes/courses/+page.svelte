@@ -3,7 +3,7 @@
 	import Course from '$lib/components/course/Course.svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { courses } from '../../store/store';
+	import { courseList } from '../../store/store';
 </script>
 
 <main class="border-solid border-2 border-green-300 m-4">
@@ -14,7 +14,7 @@
 			on:click={() => goto(`${$page.url.pathname}/edit`)}>Add new Course</button
 		>
 	</div>
-	{#each $courses as course (course.id)}
+	{#each $courseList as course (course.id)}
 		<Course {course} />
 	{/each}
 </main>

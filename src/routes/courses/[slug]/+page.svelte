@@ -1,11 +1,15 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { courses } from '../../../store/store';
+	import { courseList } from '../../../store/store';
+	import { authorList } from '../../../store/store';
 
 	const id = $page.params.slug;
-	const course = $courses.find((item) => {
+	const course = $courseList.find((item) => {
 		return item.id === id;
 	});
+	const authorNames = $authorList
+		.filter((author) => course?.authors.includes(author.id))
+		.map((author) => author.name);
 </script>
 
 {#if !!course}
@@ -29,8 +33,8 @@
 				<div class="flex">
 					<div class="font-bold mr-3">Authors:</div>
 					<div>
-						{#each course.authors ?? [] as author (author)}
-							<div>{author}</div>
+						{#each authorNames as authorName (authorName)}
+							<div>{authorName}</div>
 						{/each}
 					</div>
 					<div />

@@ -1,9 +1,13 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { authorList } from '../../../store/store';
 
 	export let course: Course;
 	const { id, title, description, duration, authors, creationDate } = course;
+	const authorNames = $authorList
+		.filter((author) => authors.includes(author.id))
+		.map((author) => author.name);
 </script>
 
 <div class="flex justify-between items-center m-4 border-solid border-2 border-green-500">
@@ -14,7 +18,7 @@
 	<div class="flex flex-col justify-evenly flex-grow m-4 min-w-fit">
 		<div class="m-2">
 			<span>Authors:</span>
-			<span>{authors?.join(',')}</span>
+			<span>{authorNames.join(',')}</span>
 		</div>
 		<div class="m-2">
 			<span>Duration:</span>

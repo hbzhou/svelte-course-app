@@ -25,6 +25,7 @@
 				class="border border-solid h-8 border-amber-300 rounded-md p-2"
 				name="title"
 				bind:value={course.title}
+				required
 			/>
 		</div>
 		<div>
@@ -40,6 +41,7 @@
 			class="border border-solid h-8 border-amber-300 rounded-md p-2"
 			name="duration"
 			bind:value={course.duration}
+			required
 		/>
 	</div>
 	<div class="m-4">
@@ -49,6 +51,7 @@
 			class="border border-solid h-24 w-48 border-amber-300 rounded-md"
 			multiple
 			bind:value={course.authors}
+			required
 		>
 			{#each mockedAuthorsList as author (author.id)}
 				<option value={author.id}>{author.name}</option>
@@ -62,6 +65,7 @@
 			class="block p-2.5 w-full rounded-md border-solid border-2 border-amber-300"
 			name="description"
 			bind:value={course.description}
+			required
 		/>
 	</div>
 </div>
