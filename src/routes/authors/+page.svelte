@@ -8,7 +8,7 @@
 	};
 </script>
 
-<div class="border-solid border-2 border-pink-400 mx-4 py-4">
+<div class="border-solid border-2 border-pink-400 m-4 py-4">
 	<div class="flex items-center justify-center my-8">
 		<div class="font-bold text-2xl col-span-2">Authors</div>
 		<button class="border-2 border-solid w-36 h-10 rounded-md border-purple-400 ml-28">
