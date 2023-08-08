@@ -32,7 +32,7 @@
 	<Modal bind:showModal>
 		<div slot="header" class="flex justify-between items-center">
 			<h2 class=" text-2xl font-bold">Edit Author</h2>
-			<button>x</button>
+			<button class="text-2xl">x</button>
 		</div>
 		<div class="flex items-center my-8">
 			<div class="mx-2 font-bold">Name:</div>
