@@ -2,7 +2,7 @@
 	let loginRequest: { email?: string; password?: string } = {};
 </script>
 
-<div class="flex flex-col items-center border-2 border-solid border-blue-400 py-4">
+<div class="flex flex-col items-center border-2 border-solid border-blue-400 py-4 m-4">
 	<div class="text-3xl font-bold my-2">Login</div>
 	<div class="my-2 flex items-center gap-12">
 		<div class="text-xl">Email</div>

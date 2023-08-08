@@ -2,7 +2,7 @@
 	let registerRequest: { name?: string; email?: string; password?: string } = {};
 </script>
 
-<div class="py-4 border-2 border-blue-600 border-s flex flex-col items-center">
+<div class="m-4 py-4 border-2 border-blue-600 border-s flex flex-col items-center">
 	<div class=" text-2xl">Registration</div>
 	<div class="flex items-center gap-10 my-4">
 		<h1 class="text-xl">Name</h1>
