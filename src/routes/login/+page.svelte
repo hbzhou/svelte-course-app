@@ -1,5 +1,21 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { login } from '../../api/auth';
+	import { user } from '../../store/store';
 	let loginRequest: { email?: string; password?: string } = {};
+	const handleLogin = async () => {
+		const loginResponse = await login(loginRequest as LoginRequest);
+		console.log(loginResponse);
+		if (loginResponse.successful) {
+			user.set({
+				name: loginResponse.user.name,
+				email: loginResponse.user.email,
+				isAuth: true,
+				token: loginResponse.result
+			});
+			goto('/courses');
+		}
+	};
 </script>
 
 <div class="flex flex-col items-center border-2 border-solid border-blue-400 py-4 m-4">
@@ -22,7 +38,9 @@
 		/>
 	</div>
 	<div class="text-center my-2">
-		<button class="border-2 border-solid bg-emerald-600 w-36 h-10 rounded-md">Login</button>
+		<button class="border-2 border-solid bg-emerald-600 w-36 h-10 rounded-md" on:click={handleLogin}
+			>Login</button
+		>
 	</div>
 	<div>
 		If you don't have an account you can {''}
