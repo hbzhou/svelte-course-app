@@ -1,11 +1,25 @@
 <script lang="ts">
 	import Modal from '$lib/common/Modal.svelte';
-	import { authorList } from '../../store/store';
+	import { onMount } from 'svelte';
+	import { authToken, authorList, user } from '../../store/store';
+	import { goto } from '$app/navigation';
+	import { getAuthors } from '../../api/author.api';
 	let showModal = false;
 	let author: Author = {
 		id: crypto.randomUUID(),
 		name: ''
 	};
+	onMount(() => {
+		if (!$user.isAuth) {
+			goto('/login');
+			return;
+		}
+		getAuthors($authToken).then((resp) => {
+			if (resp.successful) {
+				authorList.set(resp.result);
+			}
+		});
+	});
 </script>
 
 <div class="border-solid border-2 border-pink-400 m-4 py-4">

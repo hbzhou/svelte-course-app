@@ -23,7 +23,13 @@ declare type RegisterResponse = {
     result: string
 }
 
-declare type GetAllCoursesResponse = {
+declare type GetCoursesResponse = {
     successful: boolean,
     result: Array<Course>
 }
+
+declare type GetAuthorsResponse = {
+    successful: boolean,
+    result: Array<Author>
+}
+

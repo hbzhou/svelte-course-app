@@ -1,12 +1,12 @@
 import ky from "ky"
-import { basePath } from "./api"
+import { basePath, headers } from "./api"
 
 const getCourses = (token: string) => {
-    return ky.get(`${basePath}/courses/all`, { headers: { authorization: token } }).json<GetAllCoursesResponse>()
+    return ky.get(`${basePath}/courses/all`, headers(token)).json<GetCoursesResponse>()
 }
 
 const createCourse = (token: string) => {
-    return ky.post(`${basePath}/courses`, { headers: { authorization: token } }).json()
+    return ky.post(`${basePath}/courses`, { ...headers(token) }).json()
 }
 
 export {
