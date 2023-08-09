@@ -22,3 +22,8 @@ declare type RegisterResponse = {
     successful: boolean,
     result: string
 }
+
+declare type GetAllCoursesResponse = {
+    successful: boolean,
+    result: Array<Course>
+}

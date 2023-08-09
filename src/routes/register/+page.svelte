@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import authApi from '../../api/auth';
+	import authApi from '../../api/auth.api';
 	let registerRequest: Partial<RegisterRequest> = {};
 
 	const handleRegister = async () => {

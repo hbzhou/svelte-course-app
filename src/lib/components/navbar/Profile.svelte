@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { user } from '../../../store/store';
-	import authApi from '../../../api/auth';
+	import authApi from '../../../api/auth.api';
 	const handleLogin = () => goto('/login');
 	const handleLogout = async () => {
 		await authApi.logout($user.token as string);

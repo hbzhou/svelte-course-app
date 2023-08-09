@@ -1,6 +1,6 @@
 import ky from "ky"
+import { basePath } from "./api"
 
-const basePath = "http://localhost:4000"
 
 const login = (loginRequest: LoginRequest) => {
     return ky.post(`${basePath}/login`, { json: loginRequest }).json<LoginResponse>()

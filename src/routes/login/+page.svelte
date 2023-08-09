@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import authApi from '../../api/auth';
+	import authApi from '../../api/auth.api';
 	import { user } from '../../store/store';
 	let loginRequest: Partial<LoginRequest> = {};
 	const handleLogin = async () => {
