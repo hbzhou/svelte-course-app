@@ -1,11 +1,27 @@
 <script lang="ts">
 	import Modal from '$lib/common/Modal.svelte';
+	import { fail } from '@sveltejs/kit';
+	import { createAuthor } from '../../../api/author.api';
+	import { authToken, authorList } from '../../../store/store';
 	export let showModal: boolean;
 	export let handleClose: () => void;
 	export let author: Partial<Author> = {};
+
+	const handleSave = () => {
+		createAuthor(author, $authToken)
+			.then((resp) => {
+				if (resp.successful) {
+					author.name = undefined;
+					authorList.update((authors) => [...authors, resp.result]);
+				} else {
+					fail(500, resp);
+				}
+			})
+			.catch((error) => fail(500, error));
+	};
 </script>
 
-<Modal bind:showModal on:close={handleClose}>
+<Modal bind:showModal on:close={handleClose} on:save={handleSave}>
 	<div slot="header" class="flex justify-between items-center">
 		<h2 class=" text-2xl font-bold">Edit Author</h2>
 		<button class="text-2xl">x</button>

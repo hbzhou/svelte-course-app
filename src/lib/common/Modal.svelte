@@ -11,6 +11,11 @@
 		dialog.close();
 		dispatch('close');
 	};
+
+	const handleSave = () => {
+		handleClose();
+		dispatch('save');
+	};
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
@@ -27,7 +32,7 @@
 				class="border-2 border-solid rounded-md w-24 h-8 ml-2 mt-2 bg-teal-500">Cancel</button
 			>
 			<button
-				on:click={handleClose}
+				on:click={handleSave}
 				class="border-2 border-solid rounded-md w-24 h-8 ml-2 mt-2 bg-emerald-600">Save</button
 			>
 		</div>

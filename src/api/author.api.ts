@@ -5,7 +5,7 @@ const getAuthors = (token: string) => {
 }
 
 const createAuthor = (author: Partial<Author>, token: string) => {
-    return ky.post(`${basePath}/authors/add`, { ...headers(token), json: author }).json<CreateAuthorResponse>
+    return ky.post(`${basePath}/authors/add`, { ...headers(token), json: author }).json<CreateAuthorResponse>()
 }
 
 export {
