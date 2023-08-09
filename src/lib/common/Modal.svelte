@@ -1,17 +1,20 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
 	export let showModal: boolean; // boolean
 
 	let dialog: HTMLDialogElement;
+	const dispatch = createEventDispatcher();
 
 	$: if (dialog && showModal) dialog.showModal();
+
+	const handleClose = () => {
+		dialog.close();
+		dispatch('close');
+	};
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
-<dialog
-	bind:this={dialog}
-	on:close={() => (showModal = false)}
-	on:click|self={() => dialog.close()}
->
+<dialog bind:this={dialog} on:close={() => (showModal = false)} on:click|self={handleClose}>
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div on:click|stopPropagation>
 		<slot name="header" />
@@ -20,11 +23,11 @@
 		<hr />
 		<div class="flex justify-end mr-8 items-center">
 			<button
-				on:click={() => dialog.close()}
+				on:click={handleClose}
 				class="border-2 border-solid rounded-md w-24 h-8 ml-2 mt-2 bg-teal-500">Cancel</button
 			>
 			<button
-				on:click={() => dialog.close()}
+				on:click={handleClose}
 				class="border-2 border-solid rounded-md w-24 h-8 ml-2 mt-2 bg-emerald-600">Save</button
 			>
 		</div>
