@@ -2,16 +2,15 @@
 	import { goto } from '$app/navigation';
 	import { user } from '../../../store/store';
 	import { logout } from '../../../api/auth';
-	console.log($user);
 	const handleLogin = () => goto('/login');
 	const handleLogout = () => {
 		logout($user.token as string);
 		user.set({ isAuth: false });
 	};
 
-	const username = $user.isAuth ? $user.name ?? $user.email : '';
-	const action = $user.isAuth ? handleLogout : handleLogin;
-	const btnText = $user.isAuth ? 'Logout' : 'Login';
+	$: username = $user.isAuth ? $user.name ?? $user.email : '';
+	$: action = $user.isAuth ? handleLogout : handleLogin;
+	$: btnText = $user.isAuth ? 'Logout' : 'Login';
 </script>
 
 <div class="flex items-center justify-end w-80">

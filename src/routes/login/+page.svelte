@@ -5,7 +5,6 @@
 	let loginRequest: { email?: string; password?: string } = {};
 	const handleLogin = async () => {
 		const loginResponse = await login(loginRequest as LoginRequest);
-		console.log(loginResponse);
 		if (loginResponse.successful) {
 			user.set({
 				name: loginResponse.user.name,
@@ -13,6 +12,7 @@
 				isAuth: true,
 				token: loginResponse.result
 			});
+			console.log('user', $user);
 			goto('/courses');
 		}
 	};
