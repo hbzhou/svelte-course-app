@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { user } from '../../../store/store';
-	import { logout } from '../../../api/auth';
+	import authApi from '../../../api/auth';
 	const handleLogin = () => goto('/login');
-	const handleLogout = () => {
-		logout($user.token as string);
+	const handleLogout = async () => {
+		await authApi.logout($user.token as string);
 		user.set({ isAuth: false });
+		goto('/login');
 	};
 
 	$: username = $user.isAuth ? $user.name ?? $user.email : '';

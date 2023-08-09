@@ -1,5 +1,14 @@
 <script lang="ts">
-	let registerRequest: { name?: string; email?: string; password?: string } = {};
+	import { goto } from '$app/navigation';
+	import authApi from '../../api/auth';
+	let registerRequest: Partial<RegisterRequest> = {};
+
+	const handleRegister = async () => {
+		const response = await authApi.register(registerRequest as RegisterRequest);
+		if (response.successful) {
+			goto('/login');
+		}
+	};
 </script>
 
 <div class="m-4 py-4 border-2 border-blue-600 border-s flex flex-col items-center">
@@ -31,7 +40,10 @@
 		/>
 	</div>
 	<div class="my-2 text-center">
-		<button class="border-2 border-solid h-10 bg-indigo-300 w-36 rounded-md">Registration</button>
+		<button
+			class="border-2 border-solid h-10 bg-indigo-300 w-36 rounded-md"
+			on:click={handleRegister}>Registration</button
+		>
 	</div>
 	<div>
 		if you have an account you can {''}

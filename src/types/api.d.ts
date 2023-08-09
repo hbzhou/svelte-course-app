@@ -11,3 +11,14 @@ declare type LoginResponse = {
         email: string;
     };
 }
+
+declare type RegisterRequest = {
+    name: string;
+    email: string;
+    password: string;
+}
+
+declare type RegisterResponse = {
+    successful: boolean,
+    result: string
+}

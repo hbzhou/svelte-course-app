@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { login } from '../../api/auth';
+	import authApi from '../../api/auth';
 	import { user } from '../../store/store';
-	let loginRequest: { email?: string; password?: string } = {};
+	let loginRequest: Partial<LoginRequest> = {};
 	const handleLogin = async () => {
-		const loginResponse = await login(loginRequest as LoginRequest);
+		const loginResponse = await authApi.login(loginRequest as LoginRequest);
 		if (loginResponse.successful) {
 			user.set({
 				name: loginResponse.user.name,
