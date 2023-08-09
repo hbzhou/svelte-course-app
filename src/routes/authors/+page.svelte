@@ -2,10 +2,20 @@
 	import { onMount } from 'svelte';
 	import { authToken, authorList, user } from '../../store/store';
 	import { goto } from '$app/navigation';
-	import { getAuthors } from '../../api/author.api';
+	import { deleteAuthor, getAuthors } from '../../api/author.api';
 	import EditAuthor from '$lib/components/author/EditAuthor.svelte';
+	import { fail } from '@sveltejs/kit';
 
 	let showModal = false;
+	let showRemoveConfirmModal = false;
+
+	const handleRemove = (id: string) => {
+		deleteAuthor(id, $authToken)
+			.then((_) => {
+				authorList.update((authors) => authors.filter((author) => author.id !== id));
+			})
+			.catch((error) => fail(500, error));
+	};
 	onMount(() => {
 		if (!$user.isAuth) {
 			goto('/login');
@@ -37,8 +47,9 @@
 					class="border-solid border-2 p-1 border-purple-400 w-28 mx-2 rounded-md"
 					on:click={() => (showModal = true)}>Edit</button
 				>
-				<button class="border-2 border-solid p-1 border-purple-400 w-28 mx-2 rounded-md"
-					>Remove</button
+				<button
+					class="border-2 border-solid p-1 border-purple-400 w-28 mx-2 rounded-md"
+					on:click={() => handleRemove(author.id)}>Remove</button
 				>
 			</div>
 		{/each}

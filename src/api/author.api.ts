@@ -8,7 +8,12 @@ const createAuthor = (author: Partial<Author>, token: string) => {
     return ky.post(`${basePath}/authors/add`, { ...headers(token), json: author }).json<CreateAuthorResponse>()
 }
 
+const deleteAuthor = (id: string, token: string) => {
+    return ky.delete(`${basePath}/authors/${id}`, headers(token)).json<void>();
+}
+
 export {
     getAuthors,
-    createAuthor
+    createAuthor,
+    deleteAuthor
 }
