@@ -5,8 +5,8 @@ const getCourses = (token: string) => {
     return ky.get(`${basePath}/courses/all`, headers(token)).json<GetCoursesResponse>()
 }
 
-const createCourse = (token: string) => {
-    return ky.post(`${basePath}/courses`, { ...headers(token) }).json()
+const createCourse = (course: Partial<Course>, token: string) => {
+    return ky.post(`${basePath}/courses/add`, { ...headers(token), json: course }).json<CreateCourseResponse>()
 }
 
 export {

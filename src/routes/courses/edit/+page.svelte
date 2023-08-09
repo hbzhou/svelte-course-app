@@ -1,18 +1,25 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { mockedAuthorsList } from '../../../constant';
-	import { courseList } from '../../../store/store';
-	export let course: Course = { authors: [] };
+	import { fail } from '@sveltejs/kit';
+	import { createCourse } from '../../../api/course.api';
+	import { authToken, courseList } from '../../../store/store';
+	import { authorList } from '../../../store/store';
+	export let course: Partial<Course> = { authors: [] };
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		course = {
 			...course,
 			id: crypto.randomUUID(),
 			creationDate: '2023-08-07'
 		};
-		console.log('course', course);
-		courseList.update((courses) => [...courses, course]);
-		goto('/courses');
+		createCourse(course, $authToken)
+			.then((resp) => {
+				if (resp.successful) {
+					courseList.update((courses) => [...courses, resp.result]);
+					goto('/courses');
+				}
+			})
+			.catch((e) => fail(500, e));
 	};
 </script>
 
@@ -53,7 +60,7 @@
 			bind:value={course.authors}
 			required
 		>
-			{#each mockedAuthorsList as author (author.id)}
+			{#each $authorList as author (author.id)}
 				<option value={author.id}>{author.name}</option>
 			{/each}
 		</select>

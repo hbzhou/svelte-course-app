@@ -12,7 +12,6 @@
 				isAuth: true,
 				token: loginResponse.result
 			});
-			console.log('user', $user);
 			goto('/courses');
 		}
 	};

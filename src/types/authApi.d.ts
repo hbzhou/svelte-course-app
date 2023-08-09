@@ -1,3 +1,11 @@
+declare type AuthUser = {
+    name?: string;
+    email?: string;
+    role?: string;
+    isAuth?: boolean = false;
+    token?: string;
+}
+
 declare type LoginRequest = {
     email: string;
     password: string;
@@ -22,14 +30,3 @@ declare type RegisterResponse = {
     successful: boolean,
     result: string
 }
-
-declare type GetCoursesResponse = {
-    successful: boolean,
-    result: Array<Course>
-}
-
-declare type GetAuthorsResponse = {
-    successful: boolean,
-    result: Array<Author>
-}
-
