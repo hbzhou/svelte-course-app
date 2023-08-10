@@ -4,6 +4,7 @@
 	import { createAuthor } from '../../../api/author.api';
 	import { authToken, authorList } from '../../../store/store';
 	export let showModal: boolean;
+	export let title: string;
 	export let handleClose: () => void;
 	export let author: Partial<Author> = {};
 
@@ -23,7 +24,7 @@
 
 <Modal bind:showModal on:close={handleClose} on:save={handleSave}>
 	<div slot="header" class="flex justify-between items-center">
-		<h2 class=" text-2xl font-bold">Edit Author</h2>
+		<h2 class=" text-2xl font-bold">{title}</h2>
 		<button class="text-2xl">x</button>
 	</div>
 	<div class="flex items-center my-8">

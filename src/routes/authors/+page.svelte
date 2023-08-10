@@ -7,7 +7,13 @@
 	import { fail } from '@sveltejs/kit';
 
 	let showModal = false;
+	let title: string;
 	let showRemoveConfirmModal = false;
+
+	const handleEdit = (header: string) => {
+		showModal = true;
+		title = header;
+	};
 
 	const handleRemove = (id: string) => {
 		deleteAuthor(id, $authToken)
@@ -34,7 +40,7 @@
 		<div class="font-bold text-2xl col-span-2">Authors</div>
 		<button
 			class="border-2 border-solid w-36 h-10 rounded-md border-purple-400 ml-28"
-			on:click={() => (showModal = true)}
+			on:click={() => handleEdit('Create Author')}
 		>
 			Create author
 		</button>
@@ -45,7 +51,7 @@
 			<div>
 				<button
 					class="border-solid border-2 p-1 border-purple-400 w-28 mx-2 rounded-md"
-					on:click={() => (showModal = true)}>Edit</button
+					on:click={() => handleEdit('Edit Author')}>Edit</button
 				>
 				<button
 					class="border-2 border-solid p-1 border-purple-400 w-28 mx-2 rounded-md"
@@ -54,5 +60,5 @@
 			</div>
 		{/each}
 	</div>
-	<EditAuthor {showModal} handleClose={() => (showModal = false)} />
+	<EditAuthor {title} {showModal} handleClose={() => (showModal = false)} />
 </div>
