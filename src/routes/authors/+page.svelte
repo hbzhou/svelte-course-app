@@ -52,7 +52,7 @@
 				>
 				<button
 					class="border-2 border-solid p-1 border-purple-400 w-28 mx-2 rounded-md"
-					on:click={() => handleClick('DELETE', author)}>Remove</button
+					on:click={() => handleClick('DELETE', author)}>Delete</button
 				>
 			</div>
 		{/each}

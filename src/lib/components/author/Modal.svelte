@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Modal from '$lib/common/Modal.svelte';
 	import Edit from './Edit.svelte';
-	import Remove from './Remove.svelte';
+	import Delete from './Delete.svelte';
 	import { deleteAuthor, updateAuthor, createAuthor } from '../../../api/author.api';
 	import { authToken, authorList } from '../../../store/store';
 	import { fail } from '@sveltejs/kit';
@@ -60,7 +60,7 @@
 		<button class="text-2xl">x</button>
 	</div>
 	{#if deleteMode}
-		<Remove authorName={author.name} />
+		<Delete authorName={author.name} />
 	{:else}
 		<Edit {author} />
 	{/if}
