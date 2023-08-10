@@ -5,11 +5,11 @@
 	import { authToken, authorList } from '../../../store/store';
 
 	export let showModal: boolean;
-	export let author: Author;
+	export let author: Partial<Author> = {};
 	export let handleClose: () => void;
 
 	const handleSubmit = () => {
-		deleteAuthor(author.id, $authToken)
+		deleteAuthor(author.id as string, $authToken)
 			.then((_) => {
 				authorList.update((authors) => authors.filter(($author) => $author.id !== author.id));
 			})

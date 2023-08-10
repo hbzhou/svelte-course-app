@@ -8,12 +8,17 @@
 
 	let showModal = false;
 	let title: string;
-	let author: Author;
+	let author: Partial<Author> = {};
 	let showConfirmModal = false;
 
-	const handleEdit = (header: string) => {
+	const handleEdit = (header: string, newAuthor?: Author) => {
 		showModal = true;
 		title = header;
+		if (newAuthor) {
+			author = { ...newAuthor };
+		} else {
+			author = {};
+		}
 	};
 
 	const handleRemove = (authorSelected: Author) => {
@@ -50,7 +55,7 @@
 			<div>
 				<button
 					class="border-solid border-2 p-1 border-purple-400 w-28 mx-2 rounded-md"
-					on:click={() => handleEdit('Edit Author')}>Edit</button
+					on:click={() => handleEdit('Edit Author', author)}>Edit</button
 				>
 				<button
 					class="border-2 border-solid p-1 border-purple-400 w-28 mx-2 rounded-md"
@@ -59,7 +64,7 @@
 			</div>
 		{/each}
 	</div>
-	<Edit {title} {showModal} handleClose={() => (showModal = false)} />
+	<Edit {title} {showModal} {author} handleClose={() => (showModal = false)} />
 	{#if author}
 		<Remove {author} showModal={showConfirmModal} handleClose={() => (showConfirmModal = false)} />
 	{/if}

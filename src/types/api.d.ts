@@ -51,3 +51,5 @@ declare type CreateAuthorResponse = {
     successful: boolean;
     result: Author;
 }
+
+declare type UpdateAuthorResponse = CreateAuthorResponse;
