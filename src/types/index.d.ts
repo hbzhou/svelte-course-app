@@ -1,0 +1,1 @@
+declare type Mode = "CREATE" | "UPDATE" | "DELETE"

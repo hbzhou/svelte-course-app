@@ -31,7 +31,6 @@ declare type RegisterResponse = {
     result: string
 }
 
-
 declare type GetCoursesResponse = {
     successful: boolean,
     result: Array<Course>

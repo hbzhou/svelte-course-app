@@ -1,29 +1,22 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Edit from '$lib/components/author/Edit.svelte';
-	import Remove from '$lib/components/author/Remove.svelte';
+	import Modal from '$lib/components/author/Modal.svelte';
 	import { onMount } from 'svelte';
 	import { getAuthors } from '../../api/author.api';
 	import { authToken, authorList, user } from '../../store/store';
 
 	let showModal = false;
-	let title: string;
+	let mode: Mode;
 	let author: Partial<Author> = {};
-	let showConfirmModal = false;
 
-	const handleEdit = (header: string, newAuthor?: Author) => {
+	const handleClick = (newMode: Mode, newAuthor?: Author) => {
 		showModal = true;
-		title = header;
+		mode = newMode;
 		if (newAuthor) {
 			author = { ...newAuthor };
 		} else {
 			author = {};
 		}
-	};
-
-	const handleRemove = (authorSelected: Author) => {
-		showConfirmModal = true;
-		author = authorSelected;
 	};
 
 	onMount(() => {
@@ -44,7 +37,7 @@
 		<div class="font-bold text-2xl col-span-2">Authors</div>
 		<button
 			class="border-2 border-solid w-36 h-10 rounded-md border-purple-400 ml-28"
-			on:click={() => handleEdit('Create Author')}
+			on:click={() => handleClick('CREATE')}
 		>
 			Create author
 		</button>
@@ -55,17 +48,14 @@
 			<div>
 				<button
 					class="border-solid border-2 p-1 border-purple-400 w-28 mx-2 rounded-md"
-					on:click={() => handleEdit('Edit Author', author)}>Edit</button
+					on:click={() => handleClick('UPDATE', author)}>Edit</button
 				>
 				<button
 					class="border-2 border-solid p-1 border-purple-400 w-28 mx-2 rounded-md"
-					on:click={() => handleRemove(author)}>Remove</button
+					on:click={() => handleClick('DELETE', author)}>Remove</button
 				>
 			</div>
 		{/each}
 	</div>
-	<Edit {title} {showModal} {author} handleClose={() => (showModal = false)} />
-	{#if author}
-		<Remove {author} showModal={showConfirmModal} handleClose={() => (showConfirmModal = false)} />
-	{/if}
+	<Modal {mode} {showModal} {author} handleClose={() => (showModal = false)} />
 </div>
