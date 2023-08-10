@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import Course from '$lib/components/course/Course.svelte';
+	import CourseCard from '$lib/components/course/CourseCard.svelte';
 	import SearchBar from '$lib/components/course/SearchBar.svelte';
 	import { onMount } from 'svelte';
 	import { authToken, courseList } from '../../store/store';
@@ -29,6 +29,6 @@
 		>
 	</div>
 	{#each $courseList as course (course.id)}
-		<Course {course} />
+		<CourseCard {course} />
 	{/each}
 </main>

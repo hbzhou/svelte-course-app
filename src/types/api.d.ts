@@ -46,6 +46,8 @@ declare type CreateCourseResponse = {
     result: Course;
 }
 
+declare type UpdateCourseResponse = CreateCourseResponse
+
 declare type CreateAuthorResponse = {
     successful: boolean;
     result: Author;

@@ -1,40 +1,59 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
 	import { authorList } from '../../../store/store';
 
-	export let course: Course;
-	const { id, title, description, duration, authors, creationDate } = course;
-	const authorNames = $authorList
-		.filter((author) => authors.includes(author.id))
-		.map((author) => author.name);
+	export let title: string;
+	export let course: Partial<Course> = {};
+	export let handleSubmit: () => void;
 </script>
 
-<div class="flex justify-between items-center m-4 border-solid border-2 border-green-500">
-	<div class="flex flex-col m-4 w-1/2">
-		<h1 class="text-2xl text-left my-2">{title}</h1>
-		<div>{description}</div>
+<h1 class="text-3xl font-bold text-center my-2">{title}</h1>
+<div class="flex justify-between items-center m-4">
+	<div>
+		<div>Title</div>
+		<input
+			class="border border-solid h-8 border-amber-300 rounded-md p-2"
+			name="title"
+			bind:value={course.title}
+			required
+		/>
 	</div>
-	<div class="flex flex-col justify-evenly flex-grow m-4 min-w-fit">
-		<div class="m-2">
-			<span>Authors:</span>
-			<span>{authorNames.join(',')}</span>
-		</div>
-		<div class="m-2">
-			<span>Duration:</span>
-			<span>{duration} hours</span>
-		</div>
-		<div class="m-2">
-			<span>Created:</span>
-			<span>{creationDate}</span>
-		</div>
-		<div class="m-2 text-center">
-			<button
-				class="border border-solid w-36 p-1 bg-sky-500 rounded-md h-10"
-				on:click={() => goto(`${$page.url.pathname}/${id}`)}
-			>
-				Show course
-			</button>
-		</div>
+	<div>
+		<button class="mr-4 w-40 border-2 border-solid p-1 border-purple-700" on:click={handleSubmit}>
+			Create Course
+		</button>
 	</div>
+</div>
+<div class="m-4">
+	<div>Duration</div>
+	<input
+		type="number"
+		class="border border-solid h-8 border-amber-300 rounded-md p-2"
+		name="duration"
+		bind:value={course.duration}
+		required
+	/>
+</div>
+<div class="m-4">
+	<div>Authors</div>
+	<select
+		name="authors"
+		class="border border-solid h-24 w-48 border-amber-300 rounded-md"
+		multiple
+		bind:value={course.authors}
+		required
+	>
+		{#each $authorList as author (author.id)}
+			<option value={author.id}>{author.name}</option>
+		{/each}
+	</select>
+</div>
+<div class="m-4">
+	<div>Description</div>
+	<textarea
+		rows={4}
+		class="block p-2.5 w-full rounded-md border-solid border-2 border-amber-300"
+		name="description"
+		bind:value={course.description}
+		required
+	/>
 </div>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { courseList } from '../../../store/store';
 	import { authorList } from '../../../store/store';
@@ -14,7 +15,13 @@
 
 {#if !!course}
 	<div class=" border-solid border-2 border-blue-300 m-4">
-		<h1 class=" text-2xl text-center my-2">{course.title}</h1>
+		<div class="flex justify-center items-center my-4">
+			<h1 class=" text-2xl text-center my-2">{course.title}</h1>
+			<button
+				class="border border-solid h-10 w-36 bg-sky-500 rounded-md p-1 ml-10"
+				on:click={() => goto(`/courses/edit/${course.id}`)}>UPDATE</button
+			>
+		</div>
 		<div class="flex">
 			<div class=" w-1/2 m-4">{course.description}</div>
 			<div class="m-4">
