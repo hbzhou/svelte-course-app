@@ -1,27 +1,26 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { authToken, authorList, user } from '../../store/store';
 	import { goto } from '$app/navigation';
-	import { deleteAuthor, getAuthors } from '../../api/author.api';
-	import EditAuthor from '$lib/components/author/EditAuthor.svelte';
-	import { fail } from '@sveltejs/kit';
+	import Edit from '$lib/components/author/Edit.svelte';
+	import Remove from '$lib/components/author/Remove.svelte';
+	import { onMount } from 'svelte';
+	import { getAuthors } from '../../api/author.api';
+	import { authToken, authorList, user } from '../../store/store';
 
 	let showModal = false;
 	let title: string;
-	let showRemoveConfirmModal = false;
+	let author: Author;
+	let showConfirmModal = false;
 
 	const handleEdit = (header: string) => {
 		showModal = true;
 		title = header;
 	};
 
-	const handleRemove = (id: string) => {
-		deleteAuthor(id, $authToken)
-			.then((_) => {
-				authorList.update((authors) => authors.filter((author) => author.id !== id));
-			})
-			.catch((error) => fail(500, error));
+	const handleRemove = (authorSelected: Author) => {
+		showConfirmModal = true;
+		author = authorSelected;
 	};
+
 	onMount(() => {
 		if (!$user.isAuth) {
 			goto('/login');
@@ -55,10 +54,13 @@
 				>
 				<button
 					class="border-2 border-solid p-1 border-purple-400 w-28 mx-2 rounded-md"
-					on:click={() => handleRemove(author.id)}>Remove</button
+					on:click={() => handleRemove(author)}>Remove</button
 				>
 			</div>
 		{/each}
 	</div>
-	<EditAuthor {title} {showModal} handleClose={() => (showModal = false)} />
+	<Edit {title} {showModal} handleClose={() => (showModal = false)} />
+	{#if author}
+		<Remove {author} showModal={showConfirmModal} handleClose={() => (showConfirmModal = false)} />
+	{/if}
 </div>

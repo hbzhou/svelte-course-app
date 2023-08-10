@@ -7,19 +7,19 @@
 
 	$: if (dialog && showModal) dialog.showModal();
 
-	const handleClose = () => {
+	const handleCancel = () => {
 		dialog.close();
 		dispatch('close');
 	};
 
-	const handleSave = () => {
-		handleClose();
-		dispatch('save');
+	const handleSubmit = () => {
+		handleCancel();
+		dispatch('submit');
 	};
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
-<dialog bind:this={dialog} on:close={() => (showModal = false)} on:click|self={handleClose}>
+<dialog bind:this={dialog} on:close={() => (showModal = false)} on:click|self={handleCancel}>
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div on:click|stopPropagation>
 		<slot name="header" />
@@ -28,12 +28,12 @@
 		<hr />
 		<div class="flex justify-end mr-8 items-center">
 			<button
-				on:click={handleClose}
+				on:click={handleCancel}
 				class="border-2 border-solid rounded-md w-24 h-8 ml-2 mt-2 bg-teal-500">Cancel</button
 			>
 			<button
-				on:click={handleSave}
-				class="border-2 border-solid rounded-md w-24 h-8 ml-2 mt-2 bg-emerald-600">Save</button
+				on:click={handleSubmit}
+				class="border-2 border-solid rounded-md w-24 h-8 ml-2 mt-2 bg-emerald-600">Submit</button
 			>
 		</div>
 	</div>

@@ -8,7 +8,7 @@
 	export let handleClose: () => void;
 	export let author: Partial<Author> = {};
 
-	const handleSave = () => {
+	const handleSubmit = () => {
 		createAuthor(author, $authToken)
 			.then((resp) => {
 				if (resp.successful) {
@@ -22,7 +22,7 @@
 	};
 </script>
 
-<Modal bind:showModal on:close={handleClose} on:save={handleSave}>
+<Modal bind:showModal on:close={handleClose} on:submit={handleSubmit}>
 	<div slot="header" class="flex justify-between items-center">
 		<h2 class=" text-2xl font-bold">{title}</h2>
 		<button class="text-2xl">x</button>
