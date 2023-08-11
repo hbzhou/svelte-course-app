@@ -31,7 +31,7 @@
 	<div class="flex items-center justify-center my-8">
 		<div class="font-bold text-2xl col-span-2">Authors</div>
 		<button
-			class="border-2 border-solid w-36 h-10 rounded-md border-purple-400 ml-28"
+			class="border-2 border-solid w-36 h-10 rounded-md ml-28 bg-lime-700"
 			on:click={() => handleClick('CREATE')}
 		>
 			Create author
@@ -42,11 +42,11 @@
 			<div class="text-2xl">{author.name}</div>
 			<div>
 				<button
-					class="border-solid border-2 p-1 border-purple-400 w-28 mx-2 rounded-md"
+					class="border-solid border-2 p-1 w-28 mx-2 rounded-md bg-fuchsia-400"
 					on:click={() => handleClick('UPDATE', author)}>Edit</button
 				>
 				<button
-					class="border-2 border-solid p-1 border-purple-400 w-28 mx-2 rounded-md"
+					class="border-2 border-solid p-1 w-28 mx-2 rounded-md bg-red-500"
 					on:click={() => handleClick('DELETE', author)}>Delete</button
 				>
 			</div>
