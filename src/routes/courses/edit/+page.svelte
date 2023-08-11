@@ -2,8 +2,9 @@
 	import { goto } from '$app/navigation';
 	import { fail } from '@sveltejs/kit';
 	import { createCourse } from '../../../api/course.api';
-	import { authToken, courseList } from '../../../store/store';
+	import { authToken } from '../../../store/store';
 	import CourseComponent from '$lib/components/course/Course.svelte';
+	import { courseStore } from '../../../store/courseStore';
 
 	let course: Partial<Course> = { authors: [] };
 
@@ -12,7 +13,7 @@
 		createCourse({ ...course, creationDate: new Date().toISOString() }, $authToken)
 			.then((resp) => {
 				if (resp.successful) {
-					courseList.update((courses) => [...courses, resp.result]);
+					courseStore.update((courses) => [...courses, resp.result]);
 					goto('/courses');
 				}
 			})

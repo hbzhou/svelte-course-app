@@ -2,8 +2,8 @@
 	import { goto } from '$app/navigation';
 	import Modal from '$lib/components/author/Modal.svelte';
 	import { onMount } from 'svelte';
-	import { getAuthors } from '../../api/author.api';
-	import { authToken, authorList, user } from '../../store/store';
+	import { user } from '../../store/store';
+	import { authorStore } from '../../store/authorStore';
 
 	let showModal = false;
 	let mode: Mode;
@@ -24,11 +24,6 @@
 			goto('/login');
 			return;
 		}
-		getAuthors($authToken).then((resp) => {
-			if (resp.successful) {
-				authorList.set(resp.result);
-			}
-		});
 	});
 </script>
 
@@ -43,7 +38,7 @@
 		</button>
 	</div>
 	<div class="grid grid-cols-2 grid-flow-dense gap-4 place-items-center">
-		{#each $authorList as author (author.id)}
+		{#each $authorStore as author (author.id)}
 			<div class="text-2xl">{author.name}</div>
 			<div>
 				<button

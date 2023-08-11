@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { courseList } from '../../../store/store';
-	import { authorList } from '../../../store/store';
+	import { courseStore } from '../../../store/courseStore';
+	import { authorStore } from '../../../store/authorStore';
 
 	const id = $page.params.slug;
-	const course = $courseList.find((item) => {
+	const course = $courseStore.find((item) => {
 		return item.id === id;
 	});
-	const authorNames = $authorList
+	const authorNames = $authorStore
 		.filter((author) => course?.authors.includes(author.id))
 		.map((author) => author.name);
 </script>

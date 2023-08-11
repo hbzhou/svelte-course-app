@@ -4,20 +4,14 @@
 	import CourseCard from '$lib/components/course/CourseCard.svelte';
 	import SearchBar from '$lib/components/course/SearchBar.svelte';
 	import { onMount } from 'svelte';
-	import { authToken, courseList } from '../../store/store';
+	import { courseStore } from '../../store/courseStore';
 	import { user } from '../../store/store';
-	import { getCourses } from '../../api/course.api';
 
 	onMount(() => {
 		if (!$user.isAuth) {
 			goto('/login');
 			return;
 		}
-		getCourses($authToken).then((resp) => {
-			if (resp.successful) {
-				courseList.set(resp.result);
-			}
-		});
 	});
 </script>
 
@@ -29,7 +23,7 @@
 			on:click={() => goto(`${$page.url.pathname}/edit`)}>Add new Course</button
 		>
 	</div>
-	{#each $courseList as course (course.id)}
+	{#each $courseStore as course (course.id)}
 		<CourseCard {course} />
 	{/each}
 </main>

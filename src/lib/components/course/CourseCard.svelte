@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { authorList } from '../../../store/store';
+	import { authorStore } from '../../../store/authorStore';
 
 	export let course: Course;
 	const { id, title, description, duration, authors, creationDate } = course;
-	const authorNames = $authorList
+	const authorNames = $authorStore
 		.filter((author) => authors.includes(author.id))
 		.map((author) => author.name);
 </script>

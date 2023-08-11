@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { authorList } from '../../../store/store';
+	import { authorStore } from '../../../store/authorStore';
 
 	export let title: string;
 	export let course: Partial<Course> | Course = { authors: [] };
@@ -45,7 +45,7 @@
 		bind:value={course.authors}
 		required
 	>
-		{#each $authorList as author (author.id)}
+		{#each $authorStore as author (author.id)}
 			<option value={author.id}>{author.name}</option>
 		{/each}
 	</select>

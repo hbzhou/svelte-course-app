@@ -3,8 +3,9 @@
 	import Edit from './Edit.svelte';
 	import Delete from './Delete.svelte';
 	import { deleteAuthor, updateAuthor, createAuthor } from '../../../api/author.api';
-	import { authToken, authorList } from '../../../store/store';
+	import { authToken } from '../../../store/store';
 	import { fail } from '@sveltejs/kit';
+	import { authorStore } from '../../../store/authorStore';
 
 	export let mode: Mode;
 	export let showModal = false;
@@ -20,7 +21,7 @@
 	const handleDelete = () => {
 		deleteAuthor(author.id as string, $authToken)
 			.then((_) => {
-				authorList.update((authors) => authors.filter(($author) => $author.id !== author.id));
+				authorStore.update((authors) => authors.filter(($author) => $author.id !== author.id));
 			})
 			.catch((error) => fail(500, error));
 	};
@@ -41,7 +42,7 @@
 				if (resp.successful) {
 					author.name = undefined;
 					const updater = updaterCurry(resp.result);
-					authorList.update(updater);
+					authorStore.update(updater);
 				} else {
 					fail(500, resp);
 				}
