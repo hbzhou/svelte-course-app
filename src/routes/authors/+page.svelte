@@ -31,7 +31,7 @@
 	<div class="flex items-center justify-center my-8">
 		<div class="font-bold text-2xl col-span-2">Authors</div>
 		<button
-			class="border-2 border-solid w-36 h-10 rounded-md ml-28 bg-lime-700"
+			class="border-2 border-solid w-36 h-10 rounded-md ml-28 bg-amber-200"
 			on:click={() => handleClick('CREATE')}
 		>
 			Create author
