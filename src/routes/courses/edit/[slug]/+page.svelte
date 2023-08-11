@@ -6,8 +6,8 @@
 	import CourseComponent from '$lib/components/course/Course.svelte';
 	import { page } from '$app/stores';
 
-	let course = $courseList.find((course) => course.id == $page.params.id);
-
+	$: course = $courseList.find((course) => course.id == $page.params.slug) as Course;
+	const title = 'Update Course';
 	const handleSubmit = async () => {
 		updateCourse(course as Course, $authToken)
 			.then((resp) => {
@@ -21,8 +21,6 @@
 			})
 			.catch((e) => fail(500, e));
 	};
-
-	const title = 'Create Course';
 </script>
 
 <div class="border-solid border-2 border-indigo-500 m-4">

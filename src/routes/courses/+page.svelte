@@ -7,6 +7,7 @@
 	import { authToken, courseList } from '../../store/store';
 	import { user } from '../../store/store';
 	import { getCourses } from '../../api/course.api';
+
 	onMount(() => {
 		if (!$user.isAuth) {
 			goto('/login');

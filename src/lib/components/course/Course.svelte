@@ -2,7 +2,7 @@
 	import { authorList } from '../../../store/store';
 
 	export let title: string;
-	export let course: Partial<Course> = {};
+	export let course: Partial<Course> | Course = { authors: [] };
 	export let handleSubmit: () => void;
 </script>
 
@@ -18,8 +18,11 @@
 		/>
 	</div>
 	<div>
-		<button class="mr-4 w-40 border-2 border-solid p-1 border-purple-700" on:click={handleSubmit}>
-			Create Course
+		<button
+			class="mr-4 w-36 border-2 border-solid p-1 bg-amber-500 rounded-md"
+			on:click={handleSubmit}
+		>
+			{title}
 		</button>
 	</div>
 </div>
