@@ -16,3 +16,9 @@ build_app:
      policy: pull-push
   script:
    - npm run build
+
+UT:
+   stage: test
+   tag: kubernetes
+   script:
+     - npm run test  
