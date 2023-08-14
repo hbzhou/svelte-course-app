@@ -31,6 +31,7 @@ image_build:
   image: yobasystems/alpine-docker
   stage: pre-deploy
   script:
+   - service docker start
    - docker build . -t svelte-course-app:1.0.0 
   tags:
      - kubernetes
