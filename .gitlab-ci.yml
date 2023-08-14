@@ -11,7 +11,10 @@ build_app:
    - key: $CI_PROJECT_NAME
      paths:
        - node_modules
-     policy: pull-push
+     policy: pull
+   - key: $CI_PROJECT_NAME-build-$CI_COMMIT_SHORT_SHA
+     paths:
+       - build
   script:
    - npm install
    - npm run build
@@ -30,8 +33,13 @@ UT:
 image_build:
   image: mattermost/podman:1.8.0
   stage: pre-deploy
+  cache:
+    policy: pull
+    key: $CI_PROJECT_NAME-build-$CI_COMMIT_SHORT_SHA
+    paths:
+      - build
   script:
-   - podman build . -t svelte-course-app:1.0.0 
+   - podman build . -t svelte-course-app:1.0.0  --pull -v $CI_PROJECT_DIR/.cache:/cache 
    - podman login --tls-verify=false -u $docker_user -p $docker_password $registry
    - podman push --format docker svelte-course-app:1.0.0
   tags:
