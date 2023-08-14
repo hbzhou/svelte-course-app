@@ -3,7 +3,6 @@ stages:
   - build
   - test
   - pre-deploy
-  - premote
 
 
 build_app:
@@ -26,3 +25,7 @@ UT:
      - npm run test  
    tags:
      - kubernetes
+build_image:
+  stage: pre-deploy
+  script:
+   - docker build . -t svelte-course-app:1.0.0 
