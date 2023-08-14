@@ -11,7 +11,7 @@ build_app:
    - key: $CI_PROJECT_NAME-node_modules
      paths:
        - node_modules
-     policy: pull
+     policy: push
    - key: $CI_PROJECT_NAME-build-$CI_COMMIT_SHORT_SHA
      paths:
        - build
@@ -41,6 +41,7 @@ image_build:
   - key: $CI_PROJECT_NAME-node_modules
     paths:
       - node_modules
+    policy: pull
   script:
    - podman build . -t svelte-course-app:1.0.0 
    - podman login --tls-verify=false -u $docker_user -p $docker_password $registry
