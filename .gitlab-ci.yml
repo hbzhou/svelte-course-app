@@ -45,6 +45,6 @@ image_build:
   script:
    - podman build . -t svelte-course-app:1.0.0 
    - podman login --tls-verify=false -u $docker_user -p $docker_password $registry
-   - podman push --format docker svelte-course-app:1.0.0
+   - podman push --format=docker svelte-course-app:1.0.0
   tags:
      - kubernetes
