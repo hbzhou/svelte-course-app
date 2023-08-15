@@ -1,11 +1,10 @@
 variables:
-  image_name: jeremygilbert/svelte-course-app:1.0.0
-  
+  image_name: jeremygilbert/svelte-course-app
+
 stages: 
   - build
   - test
   - pre-deploy
-
 
 build_app:
   image: node:18-alpine
@@ -51,9 +50,11 @@ image_build:
       - node_modules
     policy: pull
   script:
-   - podman build . -t $image_name 
+   - version="$(grep \"version\" package.json |cut -d':' -f2|sed 's|[\",]||g').$CI_JOB_ID"
+   - echo $version
+   - podman build . -t $image_name:$version
    - podman login --tls-verify=false -u $docker_user -p $docker_password $registry
-   - podman push $image_name
+   - podman push $image_name:$version
   tags:
      - kubernetes
   needs:
