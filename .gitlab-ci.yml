@@ -52,7 +52,7 @@ image_build:
   script:
    - version="$(grep \"version\" package.json |cut -d':' -f2|sed 's|[\",]||g').$CI_JOB_ID"
    - echo $version
-   - tag = $image_name:$version
+   - tag = "$image_name:$version"
    - echo $tag
    - podman build . -t $tag
    - podman login --tls-verify=false -u $docker_user -p $docker_password $registry
