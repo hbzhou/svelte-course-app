@@ -7,7 +7,7 @@ import 'dotenv/config';
 export default defineConfig({
 	plugins: [sveltekit()],
 	server: {
-		port: 3000,
+		port: process.env.PORT as unknown as number,
 		proxy: {
 			"/api": {
 				target: process.env.BACKEND_HOST,

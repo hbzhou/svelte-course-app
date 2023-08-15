@@ -1,0 +1,12 @@
+FROM node:18-alpine 
+WORKDIR /app
+COPY dist  ./dist
+COPY bd ./bd
+COPY node_modules ./node_modules
+COPY package.json .
+COPY package-lock.json .
+
+VOLUME [ "/app/bd" ]
+
+EXPOSE 4000
+ENTRYPOINT  [ "node", "./dist/src/main.js" ]

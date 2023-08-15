@@ -5,11 +5,14 @@ import { authToken } from "./store"
 
 const createCourseStore = () => {
     authToken.subscribe(($authToken) => {
-        getCourses($authToken).then(resp => {
-            if (resp.successful) {
-                set(resp.result)
-            }
-        }).catch(error => fail(500, error))
+        if ($authToken) {
+            getCourses($authToken).then(resp => {
+                if (resp.successful) {
+                    set(resp.result)
+                }
+            }).catch(error => fail(500, error))
+
+        }
     })
     const { subscribe, update, set } = writable<Course[]>([])
 
