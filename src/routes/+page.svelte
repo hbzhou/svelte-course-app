@@ -3,6 +3,6 @@
 	import '../app.css';
 	import { goto } from '$app/navigation';
 	onMount(() => {
-		goto('/courses');
+		goto('/login');
 	});
 </script>
