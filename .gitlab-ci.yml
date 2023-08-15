@@ -1,3 +1,6 @@
+variables:
+  image_name: jeremygilbert/svelte-course-app:1.0.0
+  
 stages: 
   - build
   - test
@@ -15,6 +18,7 @@ build_app:
    - key: $CI_PROJECT_NAME-build-$CI_COMMIT_SHORT_SHA
      paths:
        - build
+     policy: push
   script:
    - npm install
    - npm run build
@@ -24,8 +28,12 @@ build_app:
 UT:
    image: node:18-alpine
    stage: test
+   cache: 
+    - key: $CI_PROJECT_NAME-node_modules
+      paths:
+        - node_modules
+      policy: pull   
    script:
-     - npm install  
      - npm run test  
    tags:
      - kubernetes
@@ -43,8 +51,11 @@ image_build:
       - node_modules
     policy: pull
   script:
-   - podman build . -t jeremygilbert/svelte-course-app:1.0.0 
+   - podman build . -t $image_name 
    - podman login --tls-verify=false -u $docker_user -p $docker_password $registry
-   - podman push jeremygilbert/svelte-course-app:1.0.0
+   - podman push $image_name
   tags:
      - kubernetes
+  needs:
+    - build_app
+    - UT
