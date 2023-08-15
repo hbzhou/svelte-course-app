@@ -50,7 +50,7 @@ image_build:
       - node_modules
     policy: pull
   script:
-   - version="$(grep \"version\" package.json |cut -d':' -f2|sed 's|[\",]||g').$CI_JOB_ID"
+   - version="$(grep \"version\" package.json |cut -d':' -f2|sed 's|[\", ]||g').$CI_JOB_ID"
    - echo $version
    - tag="$image_name:$version"
    - echo $tag
